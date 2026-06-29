@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lustramax · Panel de Gestión</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #E8212A;
+    --red-dark: #B81920;
+    --red-light: #FDE8E9;
+    --black: #111111;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-400: #9E9E9E;
+    --gray-600: #555555;
+    --white: #FFFFFF;
+    --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    --radius: 12px;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--gray-100);
+    color: var(--black);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--red);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.3px;
+  }
+
+  .header-badge {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+
+  .hero p {
+    font-size: 15px;
+    color: var(--gray-600);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .hero-divider {
+    width: 40px;
+    height: 3px;
+    background: var(--red);
+    margin: 1.25rem auto 0;
+    border-radius: 2px;
+  }
+
+  /* ── GRID ── */
+  .grid-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 1.25rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.15s, transform 0.15s;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    border-color: var(--red);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--red-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--red);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .card-body {
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.5;
+  }
+
+  .card-arrow {
+    align-self: flex-end;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+
+  .card:hover .card-arrow {
+    background: var(--red);
+  }
+
+  .card-arrow svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--gray-600);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.15s;
+  }
+
+  .card:hover .card-arrow svg {
+    stroke: var(--white);
+  }
+
+  /* CARD — estado "próximamente" */
+  .card.soon {
+    opacity: 0.55;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .card.soon:hover {
+    border-color: var(--gray-200);
+    transform: none;
+  }
+
+  .badge-soon {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    background: var(--gray-200);
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 6px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--gray-200);
+    background: var(--white);
+    text-align: center;
+    padding: 1.25rem 1.5rem;
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  footer strong {
+    color: var(--gray-600);
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 0 1rem; }
+    .hero { padding: 2rem 1rem 1.75rem; }
+    .grid-section { padding: 1.75rem 1rem 3rem; }
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">
+    <div class="logo-icon">
+      <!-- LX icon replicado del sitio -->
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="2" y="21" font-family="Arial Black, sans-serif" font-size="17" font-weight="900" fill="white">LX</text>
+      </svg>
+    </div>
+    <span class="logo-text">Lustramax.</span>
+  </a>
+  <span class="header-badge">Panel de gestión</span>
+</header>
+
+<div class="hero">
+  <h1>Dashboards operativos</h1>
+  <p>Acceso centralizado a los reportes de gestión por área. Seleccioná el dashboard que necesitás.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<section class="grid-section">
+  <p class="section-label">Áreas disponibles</p>
+  <div class="cards">
+
+    <!-- COBRANZAS -->
+    <a class="card" href="URL_COBRANZAS" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <div class="card-body">
+        <p class="card-title">Cobranzas</p>
+        <p class="card-desc">Seguimiento de cuentas a cobrar, vencimientos y estado de cobros.</p>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <!-- COMERCIAL -->
+    <a class="card" href="https://ncialone-data.github.io/ventaremitos/" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="card-body">
+        <p class="card-title">Comercial</p>
+        <p class="card-desc">Ventas, clientes, evolución de pedidos y rendimiento del equipo.</p>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <!-- FINANZAS -->
+    <a class="card" href="URL_FINANZAS" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      </div>
+      <div class="card-body">
+        <p class="card-title">Finanzas</p>
+        <p class="card-desc">Flujo de caja, presupuesto vs. real e indicadores financieros clave.</p>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <!-- LOGÍSTICA -->
+    <a class="card" href="URL_LOGISTICA" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div class="card-body">
+        <p class="card-title">Logística</p>
+        <p class="card-desc">Despachos, entregas, stock en tránsito y KPIs de distribución.</p>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <!-- INDUSTRIAL -->
+    <a class="card" href="industrial.html">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 20V10l5-5 5 5V4l5 5v11H2z"/><rect x="9" y="14" width="6" height="6"/></svg>
+      </div>
+      <div class="card-body">
+        <p class="card-title">Industrial</p>
+        <p class="card-desc">Producción, mermas, eficiencia de línea e indicadores de planta.</p>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <strong>Lustramax</strong> · Uso interno — no compartir este enlace externamente
+</footer>
+
+</body>
+</html>

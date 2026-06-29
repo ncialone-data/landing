@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lustramax · Industrial</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #E8212A;
+    --red-dark: #B81920;
+    --red-light: #FDE8E9;
+    --black: #111111;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-400: #9E9E9E;
+    --gray-600: #555555;
+    --white: #FFFFFF;
+    --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    --radius: 12px;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--gray-100);
+    color: var(--black);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--red);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-icon svg { width: 22px; height: 22px; }
+
+  .logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.3px;
+  }
+
+  .header-badge {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 2rem;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--gray-400);
+  }
+
+  .breadcrumb a {
+    color: var(--gray-600);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+
+  .breadcrumb a:hover { color: var(--red); }
+
+  .breadcrumb a svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .breadcrumb-sep { color: var(--gray-200); }
+  .breadcrumb-current { color: var(--black); font-weight: 600; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+  }
+
+  .hero-area-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+
+  .hero-area-label svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--red);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .hero h1 {
+    font-size: clamp(20px, 4vw, 30px);
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .hero p {
+    font-size: 14px;
+    color: var(--gray-600);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .hero-divider {
+    width: 40px;
+    height: 3px;
+    background: var(--red);
+    margin: 1.25rem auto 0;
+    border-radius: 2px;
+  }
+
+  /* ── GRID ── */
+  .grid-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Card general — destacada */
+  .card-featured {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 2px solid var(--red);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    transition: background 0.15s, transform 0.15s;
+  }
+
+  .card-featured:hover {
+    background: var(--red-light);
+    transform: translateY(-2px);
+  }
+
+  .card-featured .card-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--red);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-featured .card-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--white);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .card-featured .card-body { flex: 1; }
+
+  .card-featured .card-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--red);
+    background: var(--red-light);
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+  }
+
+  .card-featured .card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+
+  .card-featured .card-desc {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.5;
+  }
+
+  .card-featured .card-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-featured .card-arrow svg {
+    width: 15px;
+    height: 15px;
+    stroke: var(--white);
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Grilla de cards individuales */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    padding: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+
+  .card:hover {
+    border-color: var(--red);
+    transform: translateY(-2px);
+  }
+
+  .card .card-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--red-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card .card-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--red);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .card .card-body { flex: 1; }
+
+  .card .card-number {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 4px;
+  }
+
+  .card .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 3px;
+  }
+
+  .card .card-desc {
+    font-size: 12px;
+    color: var(--gray-600);
+    line-height: 1.5;
+  }
+
+  .card .card-arrow {
+    align-self: flex-end;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+
+  .card:hover .card-arrow { background: var(--red); }
+
+  .card .card-arrow svg {
+    width: 13px;
+    height: 13px;
+    stroke: var(--gray-600);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.15s;
+  }
+
+  .card:hover .card-arrow svg { stroke: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--gray-200);
+    background: var(--white);
+    text-align: center;
+    padding: 1.25rem 1.5rem;
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  footer strong { color: var(--gray-600); }
+
+  @media (max-width: 480px) {
+    header { padding: 0 1rem; }
+    .breadcrumb { padding: 0 1rem; }
+    .hero { padding: 2rem 1rem 1.75rem; }
+    .grid-section { padding: 1.75rem 1rem 3rem; }
+    .cards { grid-template-columns: 1fr 1fr; }
+    .card-featured { flex-direction: column; text-align: center; }
+    .card-featured .card-arrow { align-self: center; }
+  }
+
+  @media (max-width: 360px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <div class="logo-icon">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="2" y="21" font-family="Arial Black, sans-serif" font-size="17" font-weight="900" fill="white">LX</text>
+      </svg>
+    </div>
+    <span class="logo-text">Lustramax.</span>
+  </a>
+  <span class="header-badge">Panel de gestión</span>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+    Inicio
+  </a>
+  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-current">Industrial</span>
+</div>
+
+<div class="hero">
+  <div class="hero-area-label">
+    <svg viewBox="0 0 24 24"><path d="M2 20V10l5-5 5 5V4l5 5v11H2z"/><rect x="9" y="14" width="6" height="6"/></svg>
+    Área Industrial
+  </div>
+  <h1>Dashboards de producción</h1>
+  <p>Vista consolidada y por empresa de los indicadores de planta: producción, mermas y eficiencia de línea.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<section class="grid-section">
+
+  <!-- DASHBOARD GENERAL -->
+  <p class="section-label">Vista consolidada</p>
+
+  <a class="card-featured" href="https://ncialone-data.github.io/fabricasproducciones/" target="_blank" rel="noopener">
+    <div class="card-icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    </div>
+    <div class="card-body">
+      <span class="card-tag">General · 4 empresas</span>
+      <p class="card-title">Dashboard unificado</p>
+      <p class="card-desc">Datos consolidados de producción de todas las plantas. Vista ejecutiva para comparar rendimiento entre empresas.</p>
+    </div>
+    <div class="card-arrow">
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <!-- DASHBOARDS POR EMPRESA -->
+  <p class="section-label" style="margin-top: 1.5rem;">Por empresa</p>
+
+  <div class="cards">
+
+    <!-- BARMAN -->
+    <a class="card" href="https://ncialone-data.github.io/barmanproduccion/" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 20V10l5-5 5 5V4l5 5v11H2z"/><rect x="9" y="14" width="6" height="6"/></svg>
+      </div>
+      <div class="card-body">
+        <p class="card-number">Empresa 01</p>
+        <p class="card-title">Barman</p>
+        <p class="card-desc">Producción, mermas y eficiencia de planta Barman.</p>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <!-- TUBOS -->
+    <a class="card" href="https://ncialone-data.github.io/tubosproduccion/" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 20V10l5-5 5 5V4l5 5v11H2z"/><rect x="9" y="14" width="6" height="6"/></svg>
+      </div>
+      <div class="card-body">
+        <p class="card-number">Empresa 02</p>
+        <p class="card-title">Tubos</p>
+        <p class="card-desc">Producción, mermas y eficiencia de planta Tubos.</p>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <!-- IMPRENTA -->
+    <a class="card" href="https://ncialone-data.github.io/imprentaproducciones/" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 20V10l5-5 5 5V4l5 5v11H2z"/><rect x="9" y="14" width="6" height="6"/></svg>
+      </div>
+      <div class="card-body">
+        <p class="card-number">Empresa 03</p>
+        <p class="card-title">Imprenta</p>
+        <p class="card-desc">Producción, mermas y eficiencia de planta Imprenta.</p>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <!-- VYMAT -->
+    <a class="card" href="https://ncialone-data.github.io/vymatproducciones/" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 20V10l5-5 5 5V4l5 5v11H2z"/><rect x="9" y="14" width="6" height="6"/></svg>
+      </div>
+      <div class="card-body">
+        <p class="card-number">Empresa 04</p>
+        <p class="card-title">Vymat</p>
+        <p class="card-desc">Producción, mermas y eficiencia de planta Vymat.</p>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <strong>Lustramax</strong> · Uso interno — no compartir este enlace externamente
+</footer>
+
+</body>
+</html>
