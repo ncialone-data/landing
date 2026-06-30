@@ -56,10 +56,7 @@
     flex-shrink: 0;
   }
 
-  .logo-icon svg {
-    width: 22px;
-    height: 22px;
-  }
+  .logo-icon svg { width: 22px; height: 22px; }
 
   .logo-text {
     font-size: 20px;
@@ -143,12 +140,19 @@
     gap: 14px;
     transition: border-color 0.15s, transform 0.15s;
     cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font);
   }
 
   .card:hover {
     border-color: var(--red);
     transform: translateY(-2px);
+    border: 1px solid var(--red);
   }
+
+  .card { border: 1px solid var(--gray-200); }
 
   .card-icon {
     width: 44px;
@@ -171,9 +175,7 @@
     stroke-linejoin: round;
   }
 
-  .card-body {
-    flex: 1;
-  }
+  .card-body { flex: 1; }
 
   .card-title {
     font-size: 16px;
@@ -200,9 +202,7 @@
     transition: background 0.15s;
   }
 
-  .card:hover .card-arrow {
-    background: var(--red);
-  }
+  .card:hover .card-arrow { background: var(--red); }
 
   .card-arrow svg {
     width: 14px;
@@ -215,20 +215,13 @@
     transition: stroke 0.15s;
   }
 
-  .card:hover .card-arrow svg {
-    stroke: var(--white);
-  }
+  .card:hover .card-arrow svg { stroke: var(--white); }
 
-  /* CARD — estado "próximamente" */
+  /* soon */
   .card.soon {
     opacity: 0.55;
     cursor: default;
     pointer-events: none;
-  }
-
-  .card.soon:hover {
-    border-color: var(--gray-200);
-    transform: none;
   }
 
   .badge-soon {
@@ -254,8 +247,162 @@
     color: var(--gray-400);
   }
 
-  footer strong {
+  footer strong { color: var(--gray-600); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    display: none;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 0;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal {
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    animation: slideUp 0.22s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-header {
+    height: 52px;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+    padding: 0 1.25rem;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .modal-back {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+
+  .modal-back:hover { background: var(--gray-200); }
+
+  .modal-back svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--gray-600);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .modal-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    flex: 1;
+  }
+
+  .modal-subtitle {
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  .modal-open-ext {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--gray-600);
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+    flex-shrink: 0;
+  }
+
+  .modal-open-ext:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  .modal-open-ext svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .modal-body {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* Loading spinner */
+  .iframe-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--gray-100);
+    gap: 12px;
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--gray-200);
+    border-top-color: var(--red);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text {
+    font-size: 13px;
+    color: var(--gray-400);
   }
 
   @media (max-width: 480px) {
@@ -291,7 +438,7 @@
   <div class="cards">
 
     <!-- COBRANZAS — próximamente -->
-    <a class="card soon" href="#">
+    <div class="card soon">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
       </div>
@@ -300,10 +447,10 @@
         <p class="card-desc">Seguimiento de cuentas a cobrar, vencimientos y estado de cobros.</p>
         <span class="badge-soon">Próximamente</span>
       </div>
-    </a>
+    </div>
 
     <!-- COMERCIAL -->
-    <a class="card" href="https://ncialone-data.github.io/ventaremitos/" target="_blank" rel="noopener">
+    <button class="card" data-url="https://ncialone-data.github.io/ventaremitos/" data-label="Comercial" data-ext="https://ncialone-data.github.io/ventaremitos/">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
@@ -314,10 +461,10 @@
       <div class="card-arrow">
         <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
-    </a>
+    </button>
 
     <!-- FINANZAS — próximamente -->
-    <a class="card soon" href="#">
+    <div class="card soon">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
       </div>
@@ -326,10 +473,10 @@
         <p class="card-desc">Flujo de caja, presupuesto vs. real e indicadores financieros clave.</p>
         <span class="badge-soon">Próximamente</span>
       </div>
-    </a>
+    </div>
 
     <!-- LOGÍSTICA -->
-    <a class="card" href="https://ncialone-data.github.io/costoslogisticos/" target="_blank" rel="noopener">
+    <button class="card" data-url="https://ncialone-data.github.io/costoslogisticos/" data-label="Logística" data-ext="https://ncialone-data.github.io/costoslogisticos/">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
       </div>
@@ -340,10 +487,10 @@
       <div class="card-arrow">
         <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
-    </a>
+    </button>
 
     <!-- INDUSTRIAL -->
-    <a class="card" href="industrial.html">
+    <button class="card" data-url="industrial.html" data-label="Industrial" data-ext="industrial.html">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M2 20V10l5-5 5 5V4l5 5v11H2z"/><rect x="9" y="14" width="6" height="6"/></svg>
       </div>
@@ -354,7 +501,7 @@
       <div class="card-arrow">
         <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
-    </a>
+    </button>
 
   </div>
 </section>
@@ -362,6 +509,81 @@
 <footer>
   <strong>Lustramax</strong> · Uso interno — no compartir este enlace externamente
 </footer>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-back" id="modal-close" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+      </button>
+      <span class="modal-title" id="modal-title">Dashboard</span>
+      <span class="modal-subtitle" id="modal-subtitle">Panel de gestión · Lustramax</span>
+      <a class="modal-open-ext" id="modal-ext" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Abrir en pestaña
+      </a>
+    </div>
+    <div class="modal-body">
+      <div class="iframe-loading" id="iframe-loading">
+        <div class="spinner"></div>
+        <span class="loading-text">Cargando dashboard...</span>
+      </div>
+      <iframe id="dashboard-frame" src="" title="Dashboard"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('modal-overlay');
+  const frame = document.getElementById('dashboard-frame');
+  const modalTitle = document.getElementById('modal-title');
+  const modalExt = document.getElementById('modal-ext');
+  const loading = document.getElementById('iframe-loading');
+
+  document.querySelectorAll('.card[data-url]').forEach(card => {
+    card.addEventListener('click', () => {
+      const url = card.dataset.url;
+      const label = card.dataset.label;
+      const ext = card.dataset.ext;
+
+      modalTitle.textContent = label;
+      modalExt.href = ext;
+      frame.src = '';
+      loading.style.display = 'flex';
+      frame.style.visibility = 'hidden';
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      // Pequeño delay para que el spinner sea visible antes del iframe
+      setTimeout(() => {
+        frame.src = url;
+      }, 100);
+    });
+  });
+
+  frame.addEventListener('load', () => {
+    loading.style.display = 'none';
+    frame.style.visibility = 'visible';
+  });
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    frame.src = '';
+  }
+</script>
 
 </body>
 </html>
