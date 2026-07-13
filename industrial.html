@@ -73,7 +73,7 @@
     text-transform: uppercase;
   }
 
-  /* ── BREADCRUMB ── */
+  /* ── BREADCRUMB (solo texto, sin navegación) ── */
   .breadcrumb {
     background: var(--white);
     border-bottom: 1px solid var(--gray-200);
@@ -86,25 +86,8 @@
     color: var(--gray-400);
   }
 
-  .breadcrumb a {
+  .breadcrumb-home {
     color: var(--gray-600);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.15s;
-  }
-
-  .breadcrumb a:hover { color: var(--red); }
-
-  .breadcrumb a svg {
-    width: 14px;
-    height: 14px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
   }
 
   .breadcrumb-sep { color: var(--gray-200); }
@@ -571,10 +554,7 @@
 </header>
 
 <div class="breadcrumb">
-  <a href="index.html">
-    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
-    Inicio
-  </a>
+  <span class="breadcrumb-home">Inicio</span>
   <span class="breadcrumb-sep">›</span>
   <span class="breadcrumb-current">Industrial</span>
 </div>
